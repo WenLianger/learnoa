@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css">
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <title>登录页面</title>
+    <style type="text/css">
+        .logininput{
+            width: 200px;
+        }
+        .logincaptcha{
+            display: inline;
+            width: 70px;
+        }
+        .loginform{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin: 10%;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form loginform" action="loginIn" method="post" id="loginForm">
+    <div class="layui-form-item">
+        <label class="layui-form-label" for="name">用户名：</label><input class="layui-input logininput" type="text" id="name" name="name">
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" for="password">密码：</label><input class="layui-input logininput" type="password" id="password" name="password">
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" for="userVerCode">验证码：</label> <input class="layui-input logincaptcha" type="text" id="userVerCode" name="userVerCode">
+        <img src="/captcha" height="48px" onclick="refreshVerCode()" width="130px" id="verCode">
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="loginBtn" value="登录" lay-submit lay-filter="loginBtn">登录</button>
+    </div>
+</form>
+</body>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(loginBtn)', function(data){
+            console.log(data);
+            // layer.msg(JSON.stringify(data.field));
+            // return false;
+            var callback=function (res) {
+                    if (res.msg === "登录成功") {
+                        layer.msg(res.msg,{time:500},function () {
+                            location.href="users";
+                        })
+                    } else {
+                        layer.msg(res.msg);
+                        refreshVerCode();
+                    }
+                };
+            $.ajax({
+                type: "POST",
+                url: "/loginIn",
+                data: data.field,
+                success: callback
+            });
+            return false;
+        });
+    });
+
+    // 刷新图片验证码
+    // 验证码资源：https://gitee.com/whvse/EasyCaptcha
+    function refreshVerCode() {
+        $('#verCode').attr('src', '/captcha?t=' + Math.random());
+        $('#userVerCode').val('');
+    }
+</script>
+</html>

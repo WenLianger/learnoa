@@ -1,0 +1,17 @@
+spring:
+    datasource:
+        name: oasql
+        url: jdbc:mysql://localhost:3306/oasql?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&nullCatalogMeansCurrent=true
+        username: root
+        password: Wl19990721
+        driver-class-name: com.mysql.jdbc.Driver
+    activiti:
+        history-level: full
+        check-process-definitions: false
+        database-schema-update: true
+        db-identity-used: false
+        process-definition-location-prefix: classpath:/processes/
+
+mybatis:
+    mapper-locations: classpath:dao/*.xml
+    type-aliases-package: com.example.demo.model

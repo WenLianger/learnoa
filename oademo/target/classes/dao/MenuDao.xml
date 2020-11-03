@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.MenuDao">
+    <select id="selectUserPermissionNavMenuList" resultType="com.example.demo.model.Menu">
+        SELECT DISTINCT
+            m.id, m.parent_id, m.name, m.url, m.permission, m.type, m.icon, m.status, m.sort, m.create_by, m.create_time
+        FROM sys_menu AS m
+        INNER JOIN sys_role_menu AS b ON b.menu_id = m.id
+        INNER JOIN sys_user_role AS c ON c.role_id = b.role_id
+        WHERE
+            c.user_id = #{userId}
+            AND m.status = 0
+            AND m.type = 3;
+    </select>
+    <select id="selectUserPermissionMenuList" resultType="com.example.demo.model.Menu">
+        SELECT DISTINCT
+            m.id, m.parent_id, m.name, m.url, m.permission, m.type, m.icon, m.status, m.sort, m.create_by, m.create_time
+        FROM
+            sys_menu AS m
+        INNER JOIN sys_role_menu AS b ON m.id = b.menu_id
+        INNER JOIN sys_user_role AS c ON b.role_id = c.role_id
+        WHERE
+            m.parent_id = #{parentId}
+            AND c.user_id = #{userId}
+            AND m.status = 0
+            AND m.type != 3
+        ORDER BY
+            m.sort ASC;
+    </select>
+    <select id="selectPermission" resultType="java.lang.String">
+        SELECT DISTINCT
+            b.permission,b.sort
+        FROM
+            sys_menu AS b
+            INNER JOIN sys_role_menu AS c ON b.id=c.menu_id
+            INNER JOIN sys_user_role AS a ON a.role_id=c.role_id
+        WHERE
+            a.user_id=#{userId}
+        ORDER BY
+            b.sort ASC
+    </select>
+</mapper>
