@@ -1,7 +1,6 @@
-package com.example.demo.service;
+package com.example.test.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.model.userModel;
+import com.example.test.model.userModel;
 
 import java.util.List;
 
@@ -22,8 +21,4 @@ public interface userService {
 
     //查询所有用户
     List<userModel> queryAllUser();
-
-    userModel getByUsername(String username);
-
-    Page<userModel> listUserPage();
 }

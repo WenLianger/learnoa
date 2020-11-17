@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.model.userModel;
 
 import java.util.List;
 
-public interface userDao {
+public interface userDao extends BaseMapper<userModel> {
     //登录时信息核对
     userModel getInfo(String name,String password);
 
@@ -24,5 +26,7 @@ public interface userDao {
 
     //查询所有用户
     List<userModel> getAllUser();
+
+    List<userModel> selectUserList(Page page);
 
 }

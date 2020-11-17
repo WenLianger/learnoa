@@ -33,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/loginIn",method = RequestMethod.POST)
     @ResponseBody
     public Map login(userModel userModel){
-        String name=userModel.getName();
+        String name=userModel.getUsername();
         String password=userModel.getPassword();
         String uservercode=userModel.getUserVerCode();
         Map<String,Object> map=new HashMap<>();

@@ -12,6 +12,9 @@ spring:
         db-identity-used: false
         process-definition-location-prefix: classpath:/processes/
 
+    mvc:
+        static-path-pattern: /static/**
+
 mybatis:
     mapper-locations: classpath:dao/*.xml
     type-aliases-package: com.example.demo.model

@@ -1,9 +1,8 @@
-package com.example.demo.serviceImpl;
+package com.example.test.serviceImpl;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.dao.userDao;
-import com.example.demo.model.userModel;
-import com.example.demo.service.userService;
+import com.example.test.dao.userDao;
+import com.example.test.model.userModel;
+import com.example.test.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,17 +47,5 @@ public class serviceImpl implements userService {
     @Override
     public List<userModel> queryAllUser(){
         return userDao.getAllUser();
-    }
-
-    @Override
-    public userModel getByUsername(String username) {
-        return userDao.selectUserByUsername(username);
-    }
-
-    @Override
-    public Page<userModel> listUserPage(){
-        Page<userModel> page = new Page<>(1,10);
-        List<userModel> users = userDao.selectUserList(page);
-        return page.setRecords(users);
     }
 }

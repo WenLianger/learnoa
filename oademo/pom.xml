@@ -134,13 +134,13 @@
             </plugin>
 
         </plugins>
-        <resources>
-            <resource>
-                <includes>
-                    <include>static/**</include>
-                </includes>
-            </resource>
-        </resources>
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <includes>-->
+<!--                    <include>static/**</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--        </resources>-->
 
     </build>
 
